@@ -36,6 +36,17 @@ public:
     matrix &operator-=(int N);
     matrix &operator*=(int N);
     int operator==(const matrix &other) const;
+    bool equals(const matrix& other) const {
+        if (matrix_data.size() != other.matrix_data.size() || matrix_cols != other.matrix_cols) {
+            return false;
+        }
+        for (size_t i = 0; i < matrix_data.size(); i++) {
+            if (matrix_data[i] != other.matrix_data[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 };
 
 template <typename T>
@@ -57,7 +68,6 @@ public:
 
     void add(const T& value);
     void remove(int index);
-    void print() const;
     T& get(int index);
 
     template <typename U>
@@ -68,11 +78,11 @@ public:
 };
 
 template <typename T>
-T choise(LinkedList<T> list);
+T& choise(LinkedList<T>& list);
 template <typename T>
 T all_choise(LinkedList<T>& list);
 template<typename T>
-int find_index(LinkedList<T> list, const T& target);
+int find_index(LinkedList<T>& list, const T& target);
 
 
 template <typename U>
@@ -166,18 +176,9 @@ void LinkedList<T>::remove(int index) {
 }
 
 
-template <typename T>
-void LinkedList<T>::print() const {
-    Node* current = head;
-    while (current != nullptr) {
-        std::cout << current->data << " ";
-        current = current->next;
-    }
-    std::cout << std::endl;
-}
 
 template <typename T>
-T choise(LinkedList<T> list) {
+T& choise(LinkedList<T>& list) {
     std::cout <<"\nEnter the number obj: " << list;
     int index = 0;
     int blin_temp = list.size;
@@ -201,12 +202,13 @@ T all_choise(LinkedList<T>& list){
 }
 
 template<typename T>
-int find_index(LinkedList<T> list, const T& target) {
-    for (int i = 0; i < list.size + 1; i++) {
-        if (list.get(i) == target) {
-            return i;
+int find_index(LinkedList<T>& list, const T& target) {
+        for (int i = 0; i < list.size; i++) {
+            if (list.get(i).equals(target)) {
+                return i;
+            }
         }
-    }
+        return 0;
 }
 
 

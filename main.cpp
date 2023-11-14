@@ -4,11 +4,36 @@
 #include "LinkedList.h"
 #include "func.h"
 
-
+template <typename T>
+class LinkedList;
 class matrix;
-int main() {
 
+
+int main() {/*
     LinkedList<matrix> list;
+    matrix matrix_my;
+    matrix_my.create_matrix();
+    list.add(matrix_my);
+    std::cout << list;
+    matrix_my.create_matrix();
+    list.add(matrix_my);
+    std::cout << list;
+    matrix_my.create_matrix();
+    list.add(matrix_my);
+
+
+   std::cout << find_index(list, list.get(2)) << std::endl;
+    std::cout << find_index(list, list.get(1)) << std::endl;
+    std::cout << find_index(list, list.get(0)) << std::endl;
+
+/*
+    matrix temp_matr = all_choise(list);
+    int temp_index = find_index(list, temp_matr);
+    temp_matr = (temp_matr + all_choise(list));
+    list.get(temp_index - 1) = temp_matr;
+
+    std::cout << list;
+*/   LinkedList<matrix> list;
 
     matrix matrix_my;
     list.add(matrix_my);
@@ -28,15 +53,15 @@ int main() {
                     list.get(0).create_matrix();
                     num_of_matrix++;
                 } else {
-                    if (whot_create_matrix(0) == 0) {
+//                    if (whot_create_matrix(0) == 0) {
                         matrix temp;
                         temp.create_matrix();
                         list.add(temp);
-                    } else {
+/*                    } else {
                         matrix temp;
                         temp = choise(list);
                         list.add(temp);
-                    }
+                    }*/
                     num_of_matrix++;
                     break;
                 }
@@ -47,11 +72,16 @@ int main() {
                 break;
             }
             case 3: {//крут
-                all_choise(list).change_data();
+                all_choise(list).create_matrix();
                 break;
             }
             case 4: {//не так и муторно
-                all_choise(list).transposing_matrix();
+              //  all_choise(list).transposing_matrix();
+                matrix mat_to_transpose = all_choise(list);
+                int temp_index = find_index(list, mat_to_transpose);
+              //  std::cout << temp_index;
+                mat_to_transpose.transposing_matrix();
+                list.get(temp_index) = mat_to_transpose;
                     break;
             }
             case 5: {//+

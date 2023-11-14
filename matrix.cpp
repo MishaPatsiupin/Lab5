@@ -7,7 +7,7 @@ void matrix::create_matrix() {
 
     if (this->matrix_cols != 0) {
         this->matrix_cols = 0;
-        this->matrix_data = {'\0'};
+        this->matrix_data.clear();
     }
 
     if (whot_create_matrix(1) == 0) {
@@ -214,8 +214,9 @@ matrix& matrix::operator=(const matrix& other) {
 
 
 matrix matrix::operator+(const matrix& other) const {
+
     if (matrix_cols != other.matrix_cols || matrix_data.size() != other.matrix_data.size()) {
-        throw std::invalid_argument("Matrices have different sizes and cannot be added");
+        std::cout << "Matrices have different sizes and cannot be added";
         return *this;
     }
 
